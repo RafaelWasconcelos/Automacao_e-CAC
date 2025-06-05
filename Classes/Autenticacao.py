@@ -17,23 +17,21 @@ class autenticacao:
 
         if st.session_state.driver:
             try:
-                st.session_state.driver.quit() # Close any existing driver if it's still open
+                st.session_state.driver.quit() # feche qualquer driver que estiver aberto
             except Exception:
                 pass
             st.session_state.driver = None
 
         try:
             options = uc.ChromeOptions()
-            options.add_argument("--start-maximized") # Open browser maximized
+            options.add_argument("--start-maximized") # abre o navegador maximizado 
 
-            # Store the undetected driver in session state
+            # Armazena o driver "undetected" no session_state
             st.session_state.driver = uc.Chrome(options=options)
             
-            # Navigate to the e-CAC login page
+            # Navega até a página de login do e-CAC
             st.session_state.driver.get("https://cav.receita.fazenda.gov.br/autenticacao/login")
             
-            # elemento_govbr = st.session_state.driver.find_element("xpath", "//input[@alt='Acesso Gov BR']")
-            # elemento_govbr.click()
             
             return True
         except Exception as e:
